@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [NabrodovTipography]    Script Date: 20.11.2026 9:00:04 ******/
+/****** Object:  Database [NabrodovTipography]    Script Date: 23.11.2026 16:26:19 ******/
 CREATE DATABASE [NabrodovTipography]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -77,7 +77,7 @@ ALTER DATABASE [NabrodovTipography] SET QUERY_STORE = OFF
 GO
 USE [NabrodovTipography]
 GO
-/****** Object:  Table [dbo].[Ceh]    Script Date: 20.11.2026 9:00:04 ******/
+/****** Object:  Table [dbo].[Ceh]    Script Date: 23.11.2026 16:26:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -93,7 +93,7 @@ CREATE TABLE [dbo].[Ceh](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CehProducts]    Script Date: 20.11.2026 9:00:04 ******/
+/****** Object:  Table [dbo].[CehProducts]    Script Date: 23.11.2026 16:26:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -108,14 +108,13 @@ CREATE TABLE [dbo].[CehProducts](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Chet]    Script Date: 20.11.2026 9:00:04 ******/
+/****** Object:  Table [dbo].[Chet]    Script Date: 23.11.2026 16:26:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Chet](
 	[IDChet] [int] IDENTITY(1,1) NOT NULL,
-	[IDOrder] [int] NOT NULL,
 	[Summary] [decimal](12, 2) NOT NULL,
 	[IsPaid] [bit] NOT NULL,
  CONSTRAINT [PK_Chet] PRIMARY KEY CLUSTERED 
@@ -124,7 +123,7 @@ CREATE TABLE [dbo].[Chet](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Customer]    Script Date: 20.11.2026 9:00:04 ******/
+/****** Object:  Table [dbo].[Customer]    Script Date: 23.11.2026 16:26:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -139,7 +138,7 @@ CREATE TABLE [dbo].[Customer](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Discount]    Script Date: 20.11.2026 9:00:04 ******/
+/****** Object:  Table [dbo].[Discount]    Script Date: 23.11.2026 16:26:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -155,7 +154,7 @@ CREATE TABLE [dbo].[Discount](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Dogovor]    Script Date: 20.11.2026 9:00:04 ******/
+/****** Object:  Table [dbo].[Dogovor]    Script Date: 23.11.2026 16:26:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -165,14 +164,13 @@ CREATE TABLE [dbo].[Dogovor](
 	[IDCustomer] [int] NOT NULL,
 	[CreateDate] [date] NOT NULL,
 	[CompletionDate] [date] NOT NULL,
-	[IsPaid] [bit] NOT NULL,
  CONSTRAINT [PK_Dogovor] PRIMARY KEY CLUSTERED 
 (
 	[IDDogovor] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ExpiredDogovor]    Script Date: 20.11.2026 9:00:04 ******/
+/****** Object:  Table [dbo].[ExpiredDogovor]    Script Date: 23.11.2026 16:26:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -185,7 +183,7 @@ CREATE TABLE [dbo].[ExpiredDogovor](
 	[IsPaid] [bit] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Order]    Script Date: 20.11.2026 9:00:04 ******/
+/****** Object:  Table [dbo].[Order]    Script Date: 23.11.2026 16:26:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -204,7 +202,7 @@ CREATE TABLE [dbo].[Order](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Product]    Script Date: 20.11.2026 9:00:04 ******/
+/****** Object:  Table [dbo].[Product]    Script Date: 23.11.2026 16:26:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -222,7 +220,7 @@ CREATE TABLE [dbo].[Product](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ProductType]    Script Date: 20.11.2026 9:00:04 ******/
+/****** Object:  Table [dbo].[ProductType]    Script Date: 23.11.2026 16:26:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
