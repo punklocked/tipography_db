@@ -1,0 +1,33 @@
+DECLARE @Customer INT = 1
+
+SELECT
+	o.IDOrder,
+	d.IDDogovor,
+	ch.IDChet,
+	d.CreateDate AS [Дата создания договора],
+	p.NameProduct AS Название,
+	p.Price AS Цена,
+	o.Quantity AS Количество,
+	dc.DiscountPercent AS [Процент скидки],
+	CAST(p.Price * o.Quantity * (1 - dc.DiscountPercent / 100) AS decimal) AS [Изначальная сумма],
+	ch.Summary AS [Итоговая сумма]
+FROM [dbo].[Order] o
+JOIN Dogovor d ON d.IDDogovor = o.IDDogovor
+JOIN Chet ch ON ch.IDChet = o.IDChet
+JOIN CehProducts cp ON cp.IDCP = o.IDCP
+JOIN Product p ON p.IDProduct = cp.IDProduct
+JOIN Discount dc ON dc.IDDiscount = o.IDDiscount
+WHERE d.IDCustomer = @Customer AND ch.IsPaid = 0
+ORDER BY d.CreateDate, o.IDOrder
+
+SELECT
+	d.IDCustomer,
+	c.NameCustomer AS [Имя клиента],
+	COUNT(DISTINCT o.IDOrder) AS [Количество заказов],
+	CAST(SUM(ch.Summary) AS decimal) AS [Суммарная задолженность]
+FROM [dbo].[Order] o
+JOIN Dogovor d ON d.IDDogovor = o.IDDogovor
+JOIN Chet ch ON ch.IDChet = o.IDChet
+JOIN Customer c ON c.IDCustomer = d.IDCustomer
+WHERE d.IDCustomer = @Customer AND ch.IsPaid = 0
+GROUP BY d.IDCustomer, c.NameCustomer
