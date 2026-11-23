@@ -1,0 +1,25 @@
+SELECT
+	c.IDCustomer,
+	c.NameCustomer,
+	COUNT(DISTINCT o.IDOrder) AS [Количество заказов],
+	CAST(MIN(ch.Summary) AS decimal) AS [Минимальная задолженность],
+	CAST(MAX(ch.Summary) AS decimal) AS [Максимальная задолженность],
+	CAST(AVG(ch.Summary) AS decimal) AS [Средняя задолженность],
+	CAST(SUM(ch.Summary) AS decimal) AS [Всего невыплачено]
+FROM [dbo].[Order] o
+JOIN Dogovor d ON d.IDDogovor = o.IDDogovor
+JOIN Chet ch ON ch.IDChet = o.IDChet
+JOIN Customer c ON c.IDCustomer = d.IDCustomer
+WHERE ch.IsPaid = 0
+GROUP BY c.IDCustomer, c.NameCustomer
+ORDER BY [Всего невыплачено] DESC;
+
+SELECT
+	COUNT(DISTINCT o.IDOrder) AS [Количество заказов],
+	CAST(MIN(ch.Summary) AS decimal) AS [Минимальная задолженность],
+	CAST(MAX(ch.Summary) AS decimal) AS [Максимальная задолженность],
+	CAST(AVG(ch.Summary) AS decimal) AS [Средняя задолженность],
+	CAST(SUM(ch.Summary) AS decimal) AS [Всего невыплачено]
+FROM [dbo].[Order] o
+JOIN Chet ch ON ch.IDChet = o.IDChet
+WHERE ch.IsPaid = 0
